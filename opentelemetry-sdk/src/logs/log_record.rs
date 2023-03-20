@@ -36,6 +36,10 @@ impl LogRecord {
     }
 }
 
+impl opentelemetry_api::logs::LogRecord for LogRecord {
+    
+}
+
 /// TraceContext stores the trace data for logs that have an associated
 /// span.
 #[derive(Debug, Clone)]

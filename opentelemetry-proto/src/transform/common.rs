@@ -13,10 +13,7 @@ pub mod tonic {
     use crate::proto::tonic::common::v1::{
         any_value, AnyValue, ArrayValue, InstrumentationScope, KeyValue,
     };
-    use opentelemetry::{
-        sdk::{trace::EvictedHashMap, Resource},
-        Array, Value,
-    };
+    use opentelemetry::{sdk::trace::EvictedHashMap, Array, Value};
     use std::borrow::Cow;
 
     impl From<opentelemetry::sdk::InstrumentationLibrary> for InstrumentationScope {
@@ -91,17 +88,17 @@ pub mod tonic {
         ArrayValue { values }
     }
 
-    #[cfg(any(feature = "traces", feature = "logs"))]
-    pub(crate) fn resource_attributes(resource: Option<&Resource>) -> Attributes {
-        resource
-            .map(|res| {
-                res.iter()
-                    .map(|(k, v)| opentelemetry::KeyValue::new(k.clone(), v.clone()))
-                    .collect::<Vec<_>>()
-            })
-            .unwrap_or_default()
-            .into()
-    }
+    // #[cfg(any(feature = "traces", feature = "logs"))]
+    // pub(crate) fn resource_attributes(resource: Option<&Resource>) -> Attributes {
+    //     resource
+    //         .map(|res| {
+    //             res.iter()
+    //                 .map(|(k, v)| opentelemetry::KeyValue::new(k.clone(), v.clone()))
+    //                 .collect::<Vec<_>>()
+    //         })
+    //         .unwrap_or_default()
+    //         .into()
+    // }
 }
 
 #[cfg(feature = "gen-protoc")]
@@ -189,16 +186,16 @@ pub mod grpcio {
         array_value
     }
 
-    #[cfg(any(feature = "traces", feature = "logs"))]
-    pub(crate) fn resource_attributes(resource: Option<&Resource>) -> Attributes {
-        resource
-            .map(|resource| {
-                resource
-                    .iter()
-                    .map(|(k, v)| opentelemetry::KeyValue::new(k.clone(), v.clone()))
-                    .collect::<Vec<_>>()
-            })
-            .unwrap_or_default()
-            .into()
-    }
+    // #[cfg(any(feature = "traces", feature = "logs"))]
+    // pub(crate) fn resource_attributes(resource: Option<&Resource>) -> Attributes {
+    //     resource
+    //         .map(|resource| {
+    //             resource
+    //                 .iter()
+    //                 .map(|(k, v)| opentelemetry::KeyValue::new(k.clone(), v.clone()))
+    //                 .collect::<Vec<_>>()
+    //         })
+    //         .unwrap_or_default()
+    //         .into()
+    // }
 }

@@ -1,5 +1,13 @@
 //! # OpenTelemetry Logs API
 
+mod logger_provider;
+mod logger;
+mod log_record;
+
+pub use logger_provider::LoggerProvider;
+pub use logger::Logger;
+pub use log_record::LogRecord;
+
 use crate::ExportError;
 use futures_channel::{mpsc::TrySendError, oneshot::Canceled};
 use std::time::Duration;

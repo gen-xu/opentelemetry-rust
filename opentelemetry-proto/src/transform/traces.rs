@@ -8,7 +8,7 @@ pub mod tonic {
     use crate::proto::tonic::resource::v1::Resource;
     use crate::proto::tonic::trace::v1::{span, status, ResourceSpans, ScopeSpans, Span, Status};
     use crate::transform::common::tonic::Attributes;
-    use opentelemetry::trace;
+    use opentelemetry::{trace, sdk};
 
     impl From<SpanKind> for span::SpanKind {
         fn from(span_kind: SpanKind) -> Self {
@@ -125,8 +125,8 @@ pub mod grpcio {
         ResourceSpans, ScopeSpans, Span, Span_Event, Span_Link, Span_SpanKind, Status,
         Status_StatusCode,
     };
-    use crate::transform::common::grpcio::{resource_attributes, Attributes};
-    use opentelemetry::trace;
+    use crate::transform::common::grpcio::Attributes;
+    use opentelemetry::{trace, sdk};
     use protobuf::{RepeatedField, SingularPtrField};
 
     impl From<SpanKind> for Span_SpanKind {
